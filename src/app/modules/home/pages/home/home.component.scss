@@ -1,0 +1,218 @@
+@use "/src/utils/mixins.scss" as *;
+
+header {
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    height: 6rem;
+  }
+}
+
+main {
+  height: clamp(50rem,calc(100vh - 8rem),60rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+table {
+  display: table;
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+
+  thead {
+    position: sticky;
+  }
+
+  tr {
+    height: 6rem;
+  }
+}
+
+form {
+  width: 100%;
+
+  &::before {
+    content: "任天堂系统";
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: rgb(18, 18, 68);
+    position: relative;
+    left: 0;
+    top: -1.5rem;
+    font-family: "Noto Sans HK", sans-serif;
+  }
+}
+
+input[type="text"] {
+  height: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem;
+  line-height: normal;
+  border-radius: 10px;
+  border: none;
+
+  &:focus {
+    border: 2px solid black;
+    outline: none;
+    box-shadow: 0px 10px 10px black;
+  }
+}
+
+.pokedex-box {
+  position: relative;
+  height: clamp(50rem,100%,60rem);
+  margin-inline: auto;
+  box-sizing: border-box;
+  padding: clamp(.5rem,5vw,4rem);
+  background-color: rgb(209, 209, 209);
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+
+  @include media-down(sm){
+    margin-inline: 0;
+  }
+
+  &::before {
+    content:"";
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    height: .8rem;
+    width: .8rem;
+    background-color: red;
+    border-radius: 100%;
+    z-index: 200;
+
+    @include media-down(md){
+      left: 10%;
+    }
+  }
+
+  &__options {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    img {
+      width: 8rem;
+      height: 8rem;
+    }
+
+    &__buttons {
+      display: flex;
+
+      button {
+        cursor: pointer;
+        border-radius: 50px;
+        height: 4rem;
+        width:4rem;
+        position: relative;
+        background-color: rgb(133, 18, 85);
+
+        path{
+            fill:rgb(233, 230, 230)
+        }
+
+        &:disabled{
+            filter: grayscale(.6);
+            cursor: not-allowed;
+            
+            path{
+                fill: rgb(156, 156, 156)
+            }
+        
+        }
+
+        &:not(:first-child) {
+          top: 5px;
+        }
+
+        &:first-child {
+          align-self: flex-end;
+          top: -5px;
+        }
+
+        svg{
+            width: 2rem;
+            height: 2rem;
+        }
+      }
+    }
+  }
+}
+
+.pokedex-results {
+  position: relative;
+  width: clamp(24rem,28rem,80vw);
+  height: 25rem;
+  overflow-y: auto;
+  background-color: rgba(78, 255, 102, 0.87);
+  filter: grayscale(0.5);
+  padding-top: 1rem;
+  box-sizing: border-box;
+  border-block: clamp(1.8rem,10vw,2.5rem) solid rgb(91, 64, 109);
+  border-inline: clamp(3.8rem,10vw,4.5rem) solid rgb(91, 64, 109);
+  border-bottom-right-radius: 60px;
+  scroll-behavior: smooth;
+  transition: overflow 0.5s ease-in-out;
+
+  &:hover {
+    &::-webkit-scrollbar-track {
+      background-color: rgb(255, 255, 255);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: rgb(207, 49, 49);
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    transition: background 1s ease-in-out;
+  }
+
+  &__message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    gap:1rem;
+    font-size: clamp(1rem,2rem,10vw);
+
+    img{
+      height:8rem;
+
+      &.spinner{
+        animation: rotate360 1s infinite linear;
+      }
+    }
+
+  }
+
+  @keyframes rotate360 {
+    0%{
+      transform: rotateZ(0deg);
+    }
+    100%{
+      transform: rotateZ(360deg);
+    }
+  }
+
+
+
+}

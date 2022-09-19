@@ -1,0 +1,27 @@
+$sizes: (
+  xsm: 320px,
+  sm: 500px,
+  md: 700px,
+  lg: 1200px,
+  xlg: 1400px,
+);
+
+@mixin media-down($screen) {
+  @if (map-has-key($sizes, $screen)) {
+    @media screen and (max-width: map-get($sizes,$screen)) {
+      @content;
+    }
+  } @else {
+    @warn ("La clave #{$screen} no tiene ningun valor asociado");
+  }
+}
+
+@mixin media-up($screen) {
+  @if (map-has-key($sizes, $screen)) {
+    @media screen and (min-width: map-get($sizes,$screen)) {
+      @content;
+    }
+  } @else {
+    @warn ("La clave #{$screen} no tiene ningun valor asociado");
+  }
+}
